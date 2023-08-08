@@ -1,0 +1,169 @@
+% COLORS
+% The following standard colors are defined: wasp_text, wasppink, waspgrey, waspblue
+
+\documentclass[a0paper,portrait]{baposter}
+\usepackage{lipsum}  
+\usepackage{relsize}	% For \smaller
+\usepackage{url}	% For \url
+\usepackage{epstopdf}	% Included EPS files automatically converted to PDF to include with pdflatex
+\usepackage[utf8]{inputenc} 
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage[labelfont=bf]{caption}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{mathtools}
+
+% PATHS
+\graphicspath{{images/content/}{images/template/}}
+
+% FONTS AND COLORS
+\renewcommand{\familydefault}{\sfdefault}
+\newcommand{\mytitlefont}{\fontfamily{\familydefault}\selectfont }
+\newcommand{\mytextfont}{\fontfamily{\familydefault}\selectfont }
+% Comment the four lines below to skip WASP fonts
+%\usepackage{MinionPro}
+%\usepackage{MyriadPro}
+\renewcommand{\mytitlefont}{\fontfamily{MyriadPro-LF}\selectfont }
+\renewcommand{\mytextfont}{\fontfamily{MinionPro-LF}\selectfont }
+
+\definecolor{wasppink}{RGB}{203,166,169} 
+\definecolor{waspgrey}{RGB}{88,89,91}
+\definecolor{waspblack}{RGB}{0,0,0}
+\definecolor{waspblue}{RGB}{26,141,173}
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+
+\definecolor{wasp_text}{RGB}{66,80,82}
+\colorlet{wasp_banner_light}{waspblue}
+\colorlet{wasp_banner_grey}{waspgrey}
+\colorlet{wasp_banner_dark}{waspblack}
+
+% LIST SETTINGS
+\setlist{itemsep=.1em, leftmargin=1em}
+
+% COMMANDS
+\newcommand\thetitle{}\renewcommand\title[1]{\renewcommand\thetitle{#1}}
+\newcommand\theauthor{}\renewcommand\author[1]{\renewcommand\theauthor{#1}}
+\newcommand\thedepinfo{}\newcommand\depinfo[1]{\renewcommand\thedepinfo{#1}}
+\newcommand\thesupervisors{}\newcommand\supervisors[1]{\renewcommand\thesupervisors{#1}}
+\newcommand\theuniversitylogo{}\newcommand\universitylogo[1]{\renewcommand\theuniversitylogo{#1}}
+\newcommand\thecompanylogo{}\newcommand\companylogo[1]{\renewcommand\thecompanylogo{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Document Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{parts/header}
+
+\begin{document}
+
+%%% General Poster Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Eye Catcher, Title, Authors and University Images %%%%%%%%%%%%%%%%%%%%%%
+\begin{poster}{
+ % Show grid to help with alignment
+ grid=false,
+ % eyecatcher=false,
+ % Column spacing
+ colspacing=1em,
+ columns=2,
+ boxpadding=.5cm,
+ % Color style
+ headerColorOne=wasp_banner_light,
+ borderColor=wasp_banner_light,
+ headerFontColor=cyan!10!white,
+ % Format of textbox
+ textborder=faded,
+ % Format of text header
+ headerborder=open,
+ headershape=roundedright,
+ headershade=plain,
+ background=none,
+ % bgColorOne=cyan!10!white,
+ headerheight=0.12\textheight}
+%%% Eye Cacther %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{
+	Eye Catcher, empty if option eyecatcher=false - unused
+}
+%%%% Title %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{
+	\textcolor{wasp_text}{\mytitlefont \huge \thetitle}
+}
+%%% Authors %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{
+  \vspace{0.5em}
+  \textcolor{wasp_text}{\Large \theauthor\\
+	\large \thedepinfo\\
+	}
+}
+%%% Logo %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{
+  \begin{minipage}{8cm}
+   \centering
+  \begin{minipage}{4cm}
+    \centering
+		  \thecompanylogo
+  \end{minipage}
+  \begin{minipage}{4cm}
+    \centering
+	    \theuniversitylogo
+  \end{minipage}
+  \end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Now define the boxes that make up the poster
+%%%---------------------------------------------------------------------------
+%%% Each box has a name and can be placed absolutely or relatively.
+%%% The only inconvenience is that you can only specify a relative position 
+%%% towards an already declared box. So if you have a box attached to the 
+%%% bottom, one to the top and a third one which should be inbetween, you 
+%%% have to specify the top and bottom boxes before you specify the middle 
+%%% box.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{\mytitlefont Motivation \& Research Goals}{name=description,column=0,row=0,span=2}{
+  \mytextfont
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \input{parts/motivation}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{\mytitlefont Methodology}{name=motivation,column=0,row=0,span=1, below=description}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \mytextfont
+  \input{parts/methods}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{\mytitlefont Results}{name=goal,column=1,row=0,span=1, below=description }{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \mytextfont
+  \input{parts/results}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{\mytitlefont Future Plan}{name=future,column=1,row=0,span=1, below=goal }{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\mytextfont
+  \input{parts/future}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{References}{headerColorOne=wasp_banner_grey, borderColor=wasp_banner_grey, name=results,column=1,row=0,span=1, below=future }{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\mytextfont
+  \input{parts/references}
+}
+
+\headerbox{}{name=foottext, column=0, span=2, above=bottom, textborder=none,headerborder=none,boxheaderheight=0pt,boxColorOne=wasp_banner_grey}{\hfill \includegraphics[height=1cm]{stars_transparent}}
+
+
+\end{poster}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
